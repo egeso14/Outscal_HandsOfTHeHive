@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ef6a852b3fbddee46b3af614bdb00482
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 54785
+  packageName: Honey Bee Animated
+  packageVersion: 2021.3.0f1
+  assetPath: Assets/Bee/Scripts/BeeCamera.cs
+  uploadId: 706748
