@@ -20,8 +20,15 @@ public class InputReader : ScriptableObject, InputSystem_Actions.IPlayerActions,
         }
     }
 
+    private void OnDisable()
+    {
+        UnSetGameplay();
+    }
+
     public event Action<Vector2> MoveEvent;
     public event Action<float> ZoomEvent;
+    public event Action PauseEvent;
+    public event Action ResumeEvent;
 
     public void SetGameplay()
     {
@@ -29,103 +36,107 @@ public class InputReader : ScriptableObject, InputSystem_Actions.IPlayerActions,
         _inputSystem_Actions.UI.Enable();
     }
 
+    public void UnSetGameplay()
+    {
+        _inputSystem_Actions.Player.Disable();
+        _inputSystem_Actions.UI.Disable();
+    }
+
     public void OnAttack(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void OnCancel(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnClick(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void OnCrouch(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void OnMiddleClick(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        MoveEvent?.Invoke(context.ReadValue<Vector2>());
+        if (context.performed)
+        {
+            MoveEvent.Invoke(context.ReadValue<Vector2>());
+        }
+        if (context.canceled)
+        {
+            MoveEvent.Invoke(Vector2.zero);
+        }
     }
 
     public void OnNavigate(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void OnNext(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnPoint(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnPrevious(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnRightClick(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnScrollWheel(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnSubmit(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public void OnTrackedDeviceOrientation(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public void OnTrackedDevicePosition(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
-    }
 
     public void OnZoom(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (context.performed)
+        {
+            Debug.Log(context.ReadValue<Vector2>());
+            ZoomEvent.Invoke(context.ReadValue<Vector2>().y);
+        }
     }
 }
