@@ -111,20 +111,16 @@ public class CameraController : MonoBehaviour
         }
     }
     #endregion
-    void Update()
-    {
-        
-    }
-
     private void FindBackgroundBounds()
     {
-        var bgImageObject = GameObject.FindGameObjectWithTag("BackgroundImage");
-        Debug.Assert(bgImageObject != null, "bgImageObject is null!");
-        var renderer = bgImageObject.GetComponent<Renderer>();
-        Debug.Assert(renderer != null, "renderer is null!");
-        backgroundBounds = renderer.bounds;
-        Debug.Assert(backgroundBounds != null, "backgroundBounds is null");
+        var backgroundObject = GameObject.FindGameObjectWithTag("BackgroundImage");
+        Debug.Assert(backgroundObject != null, "Couldn't find any object with tag BackgroundImage");
+        BackgroundProperties backgroundProperties = backgroundObject.GetComponent<BackgroundProperties>();
+        Debug.Assert(backgroundProperties != null, "Background object doesn't have background properties component");
+        backgroundBounds = backgroundProperties.GetBackgroundBounds();
     }
+
+
 
     private void CreateCameraMovementBounds()
     {
