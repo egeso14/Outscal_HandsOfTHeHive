@@ -19,3 +19,7 @@ MonoBehaviour:
   backgroundDimensions: {x: 20, y: 20}
   backgroundCenterPositon: {x: 0, y: 0, z: 0}
   flyZoneDepth: 5
+  beeSpawnInterval: 5
+  maxBees: 10
+  hiveDistanceToSpawnPoint: {x: 1, y: 1}
+  beeSpawnLocation: {x: 0, y: 0, z: -2.5}
