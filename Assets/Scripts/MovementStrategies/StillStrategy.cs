@@ -1,4 +1,6 @@
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -7,6 +9,7 @@ public class StillStrategy : MovementStrategy
     // references
     private BeeBrain myBrain;
     private SwarmParameters swarmParameters;
+    private Collider myCollider;
     // internals
     private float waitAmount;
     private float waitTime;
@@ -14,31 +17,51 @@ public class StillStrategy : MovementStrategy
     private float moveAmount;
     private float moveTime;
 
+    private float movesInOneDirectionFor;
+    private LayerMask detectionMask;
+    // owned helper objects
+    private TimedRandomVectorGenerator vectorGenerator;
+
+
     private bool waiting;
     public StillStrategy(BeeBrain brain)
     {
         myBrain = brain;
         swarmParameters = SwarmParameters.Instance;
-
+        myCollider = myBrain.GetComponent<Collider>();
+        // get these values from swarmParameters
         waitTime = 0;
         waitAmount = 0.5f;
+        movesInOneDirectionFor = 1;
 
-        
+        moveAmount = 1;
+        moveTime = 0;
+
+        vectorGenerator = new TimedRandomVectorGenerator(movesInOneDirectionFor);
+
+        detectionMask = LayerMask.GetMask("Bee", "FlyZoneBoundaries");
     }
 
     public Vector3 CalculateVelocityVector()
     {
         // fix this by adding determineMoving function
-        if (waiting) 
+        
+        var isWaiting = DetermineIsWaiting();
+        return isWaiting ? CalculateWaitingVelocity()
+                           : CalculateMovingVelocity();
+    }
+
+    private bool DetermineIsWaiting()
+    {
+        if (waiting)
         {
             waitTime -= Time.fixedDeltaTime;
             if (waitTime < 0)
             {
                 waitTime = waitAmount;
                 waiting = false;
-                return CalculateMovingVelocity();
+               
             }
-            return CalculateWaitingVelocity();
         }
         else
         {
@@ -47,10 +70,9 @@ public class StillStrategy : MovementStrategy
             {
                 moveTime = moveAmount;
                 waiting = true;
-                return CalculateWaitingVelocity();
             }
-            return CalculateMovingVelocity();
         }
+        return waiting;
     }
 
     private Vector3 CalculateWaitingVelocity()
@@ -60,8 +82,10 @@ public class StillStrategy : MovementStrategy
 
     private Vector3 CalculateMovingVelocity()
     {
+        
         var detectedColliders = Physics.OverlapSphere(myBrain.transform.position,
-            swarmParameters.detectionRadius);
+                                       swarmParameters.detectionRadius,
+                                        layerMask: detectionMask);
         
 
         Vector3 cohesionSum = Vector3.zero;
@@ -70,15 +94,22 @@ public class StillStrategy : MovementStrategy
 
         foreach (var collider in detectedColliders)
         {
-            Vector3 colliderPosition = collider.transform.position;
-
+            if (collider == myCollider) continue;
+            Vector3 colliderPosition = collider.ClosestPoint(myBrain.transform.position);
             var distance = colliderPosition - myBrain.transform.position;
-
-            cohesionSum += GetCohesionWeight(distance.sqrMagnitude) * colliderPosition;
-            avoidanceSum += GetAvoidanceWeight(distance.sqrMagnitude) * colliderPosition;
+            avoidanceSum -= GetAvoidanceWeight(distance.sqrMagnitude) * colliderPosition;
+            if (collider.gameObject.CompareTag("Bee"))
+            {
+                cohesionSum += GetCohesionWeight(distance.sqrMagnitude) * colliderPosition;
+            }    
         }
-
         
+
+        Vector3 aggregate = cohesionSum + avoidanceSum;
+        float remainder = swarmParameters.beeSpeedCap - aggregate.magnitude;
+        var buzzinessVector = remainder < 0 ? Vector3.zero : vectorGenerator.GenerateOfMagnitude(remainder);
+        
+        return (aggregate + buzzinessVector).normalized;
 
     }
 
@@ -90,8 +121,10 @@ public class StillStrategy : MovementStrategy
 
     private float GetAvoidanceWeight(float distance)
     {
-        return Mathf.InverseLerp(swarmParameters.avoidanceMinRange,
-            swarmParameters.avoidanceMaxRange, distance);
+        var min = swarmParameters.avoidanceMinRange;
+        var max = swarmParameters.avoidanceMaxRange;
+        return Mathf.Lerp(MathU.Square(max), MathU.Square(min), distance);
+       
     }
 
 }

@@ -21,6 +21,13 @@ public class LevelConfig : ScriptableObject
             return _instance;
         }
     }
+
+    private void OnEnable()
+    {
+        beeSpawnLocation = new Vector3(backgroundCenterPositon.x,
+                                        backgroundCenterPositon.y,
+                                        backgroundCenterPositon.z - flyZoneDepth / 2);
+    }
     //Camera
     [SerializeField] public float baseCameraDistance;
     [SerializeField] public float baseCameraSpeed;
@@ -33,4 +40,11 @@ public class LevelConfig : ScriptableObject
 
     //Gameplay
     [SerializeField] public float flyZoneDepth;
+    [SerializeField] public float beeSpawnInterval;
+    [SerializeField] public int maxBees;
+
+
+    // LevelSetup
+    [SerializeField] public Vector2 hiveDistanceToSpawnPoint;
+    public Vector3 beeSpawnLocation;
 }

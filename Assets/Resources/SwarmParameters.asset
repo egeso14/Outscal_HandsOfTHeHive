@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db9eb76f419ee14ab01ff29f65a4c4c, type: 3}
   m_Name: SwarmParameters
   m_EditorClassIdentifier: 
-  beeOverlapSphereRadius: 1.2
+  detectionRadius: 3
   beeSpeedCap: 1
+  cohesionMaxRange: 4
+  cohesionMinRange: 1
+  avoidanceMaxRange: 1
+  avoidanceMinRange: 0.2
+  buzzinessMaxRange: 0
+  buzzinessMinRange: 0

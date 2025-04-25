@@ -10,6 +10,7 @@ public enum Commands
 
 public class BeeBrain : MonoBehaviour
 {
+    public static int numberOfActiveBees;
     private Commands _command;
     private BeeMovement movement;
     private SwarmParameters swarmParameters;
@@ -28,10 +29,20 @@ public class BeeBrain : MonoBehaviour
         CommunicateStrategy(Commands.None);
     }
 
+    private void OnDestroy()
+    {
+        numberOfActiveBees--;
+    }
+
+    private void Awake()
+    {
+        numberOfActiveBees++;
+    }
+
     private void CommunicateStrategy(Commands command)
     {
         var strategy = TemporaryFactory(command);
-        movement.SetStrategy(command);
+        movement.SetStrategy(strategy);
     }
 
     private MovementStrategy TemporaryFactory(Commands command)

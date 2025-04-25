@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Background
   - BackgroundImage
+  - Bee
   layers:
   - Default
   - TransparentFX
@@ -15,9 +16,9 @@ TagManager:
   - UI
   - Bee
   - FlyZoneBoundaries
-  - 
-  - 
-  - 
+  - BlurVolume
+  - BlueCamera
+  - Background
   - 
   - 
   - 
