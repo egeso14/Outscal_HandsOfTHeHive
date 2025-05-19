@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bb9e37ff14f93f44f8a19cc35433a769
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 54785
+  packageName: Honey Bee Animated
+  packageVersion: 2021.3.0f1
+  assetPath: Assets/Bee/Scenes/BeeSettings.lighting
+  uploadId: 706748

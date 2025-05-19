@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f37854a6a9af84e96da845b7efe5ac, type: 3}
+  m_Name: LevelConfig
+  m_EditorClassIdentifier: 
+  baseCameraDistance: 10
+  baseCameraSpeed: 0
+  maxCameraZoomInFactor: 0
+  maxCameraZoomOutFactor: 0
+  backgroundDimensions: {x: 20, y: 20}
+  backgroundCenterPositon: {x: 0, y: 0, z: 0}
+  flyZoneDepth: 5
+  beeSpawnInterval: 0.1
+  maxBees: 5
+  hiveDistanceToSpawnPoint: {x: 1, y: 1}
+  navmeshEdgeLength: 0.5
+  beeSpawnLocation: {x: 0, y: 0, z: -2.5}

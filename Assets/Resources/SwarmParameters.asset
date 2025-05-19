@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3db9eb76f419ee14ab01ff29f65a4c4c, type: 3}
+  m_Name: SwarmParameters
+  m_EditorClassIdentifier: 
+  detectionRadius: 5
+  beeSpeedCap: 1
+  cohesionMaxRange: 3
+  cohesionMinRange: 1.4
+  avoidanceMaxRange: 0.8
+  avoidanceMinRange: 0.35
+  detectNumForCohesion: 5
+  targetDistance: 1
+  moveTime: 1
+  waitTime: 1
+  idealNeighborCount: 6
+  visionDistance: 1.5
+  visionSemiAngle: 100
+  boidsNearbyToBeAlone: 2
+  cohesionRadius: 1.5
+  squaredCohesionRadius: 0
+  squaredFullCohesionRadius: 0
+  avoidanceRadius: 1
+  squaredAvoidanceRadius: 0
+  squaredFullAvoidanceRadius: 0
+  avoidanceBaseWeight: 0.7
+  cohesionBaseWeight: 1
+  alignmentBaseWeight: 1
+  momentumWeight: 1.7
+  angularSpeed: 90
+  movementSpeed: 1
+  sqrFacingThreshold: 0
+  smoothnessRadiusOffset: 1
+  facingThreshold: 0.2
+  slowTresholdAngle: 30
+  slowTresholdDistance: 1
