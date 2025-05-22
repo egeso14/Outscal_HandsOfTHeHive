@@ -21,13 +21,19 @@ public abstract class BlendedSteering : ISteeringBehavior
     protected float maxAcceleration;
     protected float maxRotationAngle; // should we even include rotations in blended behaviors?
     protected bool isCompleted;
+    
+    protected BlendedSteering(float maxAcceleration, float maxRotationAngle)
+    {
+        this.maxAcceleration = maxAcceleration;
+        this.maxRotationAngle = maxRotationAngle;
+    }
 
     public bool IsCompleted()
     {
         return isCompleted;
     }
 
-    public void DebugBehavior()
+    public virtual void DebugBehavior()
     {
 
     }
@@ -44,6 +50,7 @@ public abstract class BlendedSteering : ISteeringBehavior
         {
             output.linear = output.linear.normalized * maxAcceleration;
         }
+
         return output;
 
     }
@@ -58,6 +65,8 @@ public abstract class BlendedSteering : ISteeringBehavior
             }
         }
     }
+
     
+
 
 }

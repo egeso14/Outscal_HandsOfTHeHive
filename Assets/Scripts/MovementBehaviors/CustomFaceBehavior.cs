@@ -4,8 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-
-public class FaceBehavior : ISteeringBehavior
+/*
+public class CustomFaceBehavior : ISteeringBehavior
 {
     private Vector3 targetPosition;
     private Transform rootTransform;
@@ -13,7 +13,7 @@ public class FaceBehavior : ISteeringBehavior
     private GoParams myParams;
     private Vector3 currentMovementDirection;
     
-    public FaceBehavior(Transform rootTransform, Vector3 targetPosition)
+    public CustomFaceBehavior(Transform rootTransform, Vector3 targetPosition)
     {
         
         this.targetPosition = new Vector3(targetPosition.x, targetPosition.y, rootTransform.position.z);
@@ -128,3 +128,4 @@ public class FaceBehavior : ISteeringBehavior
 
 
 }
+*/

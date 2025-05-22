@@ -1,10 +1,11 @@
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class WanderBehavior : ISteeringBehavior
 {
     private bool isCompleted;
-    private Vector3 wanderOrientation; // the orientation of the wander target, need to keep track of this to keep things stable
+    private Vector3 wanderTarget; // the orientation of the wander target, need to keep track of this to keep things stable
     private float wanderRadius;
     private float wanderOffset;
     private float wanderRate;
@@ -20,18 +21,26 @@ public class WanderBehavior : ISteeringBehavior
         this.maxAcceleration = maxAcceleration;
         this.rootTransform = rootTransform;
         seek = new SeekBehavior(rootTransform, Vector3.zero, maxAcceleration);
+        wanderTarget = Vector3.zero;
     }
 
     public SteeringOutput GetSteering()
     {
-        wanderOrientation += Random.onUnitSphere * Random.Range(0f, 1f) * wanderRate;
-        var targetOrientation = rootTransform.rotation * wanderOrientation;
-        var target = rootTransform.position + rootTransform.forward * wanderOffset;
-        target += wanderRadius * wanderOrientation;
-        seek.SetTarget(target);
+        /*Vector3 randomAxis = Random.onUnitSphere;
+        float randomAngle = wanderRate * Random.Range(0f, 1f);
+        Quaternion randomRotation = Quaternion.AngleAxis(randomAngle, randomAxis);
+        wanderOrientation = randomRotation * wanderOrientation;
+        var wanderDirection = wanderOrientation * Vector3.forward; // to convert it to a direction vector*/
+        float wanderTargetX = wanderTarget.x + Random.Range(0f, 1) * wanderRate;
+        float wanderTargetY = wanderTarget.y + Random.Range(0f, 1) * wanderRate;
+        float wanderTargetZ = wanderTarget.z + Random.Range(0f, 1) * wanderRate;
 
-        SteeringOutput output = seek.GetSteering();
-        return output;
+        wanderTarget = new Vector3(wanderTargetX, wanderTargetY, wanderTargetZ);
+        wanderTarget.Normalize();
+
+
+        seek.SetTarget(rootTransform.position + rootTransform.forward * wanderOffset + wanderTarget * wanderRadius);
+        return seek.GetSteering();
     }
 
     public bool IsCompleted()

@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using UnityEngine;
 
 public class ObstacleAndWallAvoidanceBehavior : ISteeringBehavior
@@ -9,6 +10,7 @@ public class ObstacleAndWallAvoidanceBehavior : ISteeringBehavior
     private LayerMask raycastMask;
     private SeekBehavior seek;
     private bool isCompleted;
+    private SteeringOutput lastOutput;
 
     public ObstacleAndWallAvoidanceBehavior(Transform transform, Rigidbody rigidBody, 
                             float maxAcceleration, float avoidDistance, float rayLength,
@@ -20,26 +22,41 @@ public class ObstacleAndWallAvoidanceBehavior : ISteeringBehavior
         this.rigidBody = rigidBody;
         this.raycastMask = raycastMask;
         seek = new SeekBehavior(transform, Vector3.zero, maxAcceleration);
+        lastOutput = new SteeringOutput();
     }
 
     public SteeringOutput GetSteering()
     {
+        if (rigidBody == null)
+        {
+            Debug.Log("rigidBody is the issue");
+        }
+        if (transform == null)
+        {
+            Debug.Log("transform is the issue");
+        }
         if (Physics.Raycast(transform.position, rigidBody.linearVelocity,out RaycastHit hitInfo, rayLength, raycastMask))
         {
             Vector3 target = hitInfo.point + hitInfo.normal * avoidDistance;
             seek.SetTarget(target);
-            return seek.GetSteering();
+            lastOutput = seek.GetSteering();
+            return lastOutput;
         }
+             
         return new SteeringOutput();
     }
 
-    public void DebugBehavior()
-    {
 
-    }
 
     public bool IsCompleted()
     {
         return isCompleted;
     }
+
+    public void DebugBehavior()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, lastOutput.linear.normalized + transform.position);
+    }
+
 }

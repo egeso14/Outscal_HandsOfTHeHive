@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
-
+/*
 public enum GoStates
 {
     Flocking,
@@ -304,3 +304,4 @@ public class BoidsBehavior : ISteeringBehavior
         return movementDirection * myParams.movementSpeed;
     }
 }
+*/

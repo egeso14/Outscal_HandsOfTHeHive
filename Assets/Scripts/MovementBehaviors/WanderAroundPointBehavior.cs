@@ -8,20 +8,21 @@ public class WanderAroundPointBehavior : BlendedSteering
     private WanderBehavior wanderBehavior;
     private SeekBehavior centerSeekBehavior;
     private Transform rootTransform;
+    private SteeringOutput lastOutput;
     public WanderAroundPointBehavior(float maxDistance, Vector3 centerPoint, Transform rootTransform, float maxAcceleration,
-                                    float wanderBehaviorRadius, float wanderBehaviorCircleOffset, float wanderBehaviorRate,
-                                    float maxAccelerartion)
+                                    float wanderBehaviorRadius, float wanderBehaviorCircleOffset, float wanderBehaviorRate) : base(maxAcceleration, 0)
     {
         this.centerPoint = centerPoint;
         this.maxDistance = maxDistance;
         this.rootTransform = rootTransform;
 
-        wanderBehavior = new WanderBehavior(wanderBehaviorRadius, wanderBehaviorCircleOffset, wanderBehaviorRate, maxAccelerartion, rootTransform);
+        wanderBehavior = new WanderBehavior(wanderBehaviorRadius, wanderBehaviorCircleOffset, wanderBehaviorRate, maxAcceleration, rootTransform);
         centerSeekBehavior = new SeekBehavior(rootTransform, centerPoint, maxAcceleration);
         // now we determine the weights of these behaviors
         var seekWeight = CalculateSeekWeight();
         behaviors = new List<BehaviorAndWeight>{ new BehaviorAndWeight(wanderBehavior, 1),
-                                                 new BehaviorAndWeight(centerSeekBehavior, seekWeight)};
+                                                new BehaviorAndWeight(centerSeekBehavior, 0)};
+        lastOutput = new SteeringOutput();
     }
 
     public void SetMaxDistance(float newMaxDistance)
@@ -40,7 +41,16 @@ public class WanderAroundPointBehavior : BlendedSteering
     public override SteeringOutput GetSteering()
     {
         var seekWeight = CalculateSeekWeight();
-        SetWeight(seekWeight, centerSeekBehavior);
-        return base.GetSteering();
+        //SetWeight(seekWeight, centerSeekBehavior);
+        lastOutput = base.GetSteering();
+        return lastOutput;
     }
+
+    public override void DebugBehavior()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(rootTransform.position, lastOutput.linear.normalized + rootTransform.position);
+    }
+
+
 }

@@ -8,17 +8,31 @@ public class BeeMovement : MonoBehaviour
     private Rigidbody body;
     private StrategyData strategyBeingExecuted;
     public Transform rootTransform;
+    private SwarmParameters swarmParams;
 
     private Queue<ISteeringBehavior> toDoList;
     private ISteeringBehavior currentBehavior;
     public event Action OnStrategyComplete;
-
+    private Vector3 centerPoint;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Debug.Assert(rootTransform != null);
         body = GetComponent<Rigidbody>();
+        Debug.Assert(body != null);
+        swarmParams = SwarmParameters.Instance;
+       
+        centerPoint = rootTransform.position;
+        currentBehavior = new BuzzingBehavior(rootTransform.position, rootTransform, body);
+        SetRandomStartingVelocity();
     }
+
+
+    private void SetRandomStartingVelocity()
+    {
+        body.linearVelocity = UnityEngine.Random.onUnitSphere;            
+    }
+
 
     void FixedUpdate()
     {
@@ -37,10 +51,18 @@ public class BeeMovement : MonoBehaviour
     private void UpdateWithAlgorithmResults()
     {
         Debug.Assert(currentBehavior != null);
-        SteeringOutput steeringOutput = new SteeringOutput();
-        currentBehavior.Update(steeringOutput);
-        body.linearVelocity = steeringOutput.linear;
-        transform.rotation = steeringOutput.angular;
+
+        var steeringOutput = currentBehavior.GetSteering();
+        //currentBehavior.Update(steeringOutput);
+        body.linearVelocity += steeringOutput.linear;
+
+        if (body.linearVelocity.sqrMagnitude > MathU.Square(swarmParams.beeSpeedCap))
+        {
+            body.linearVelocity = body.linearVelocity.normalized * swarmParams.beeSpeedCap;
+        }
+
+
+        rootTransform.localRotation = steeringOutput.angular * rootTransform.localRotation;
 
     }
 
@@ -79,14 +101,15 @@ public class BeeMovement : MonoBehaviour
         switch (strategyData.strategy)
         {
             case Strategy.Buzz:
-                steps.Enqueue(new StillStrategy(rootTransform));
+                steps.Enqueue(new BuzzingBehavior(rootTransform.position, rootTransform, body));
+
                 return steps;
             case Strategy.Go:                
                 //steps.Enqueue(new FaceBehavior(rootTransform, strategyData.targetPos));
-                steps.Enqueue(new BoidsBehavior(strategyData.targetPos, rootTransform, body));
+                
                 return steps;
             default:
-                steps.Enqueue(new StillStrategy(rootTransform));
+                
                 return steps;
         }
 

@@ -13,15 +13,29 @@ MonoBehaviour:
   m_Name: SwarmParameters
   m_EditorClassIdentifier: 
   detectionRadius: 5
-  beeSpeedCap: 1
+  beeSpeedCap: 0.8
   cohesionMaxRange: 3
   cohesionMinRange: 1.4
   avoidanceMaxRange: 0.8
   avoidanceMinRange: 0.35
   detectNumForCohesion: 5
   targetDistance: 1
-  moveTime: 1
-  waitTime: 1
+  buzz_maxAcceleration: 0.08
+  buzz_beeDensityPerUnitRadius: 5
+  buzz_baseMaxDistanceForWanderAP: 1
+  buzz_maxMaxDistanceForWanderAP: 3
+  buzz_minMaxDistanceForWanderAP: 0.2
+  buzz_maxDistanceIncrementAmount: 0.2
+  buzz_angularSpeed: 30
+  buzz_rotationConstraintX: 60
+  buzz_rotationConstraintZ: 0
+  obs_avoidDistance: 0.4
+  obs_rayLength: 0.4
+  wander_radius: 0.2
+  wander_circleOffset: 0.6
+  wander_rate: 0.57
+  colAvoidance_detectionRadius: 0.4
+  colAvoidance_beeColliderRadius: 0.1
   idealNeighborCount: 6
   visionDistance: 1.5
   visionSemiAngle: 100

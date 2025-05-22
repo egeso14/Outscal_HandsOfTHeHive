@@ -94,9 +94,28 @@ public class SwarmParameters : ScriptableObject
     public float targetDistance;
 
 
-    [Header("Buzz Params")]
-    public float moveTime;
-    public float waitTime;
+    [Header("BuzzingBehavior Params")]
+    public float buzz_maxAcceleration;
+    public float buzz_beeDensityPerUnitRadius;
+    public float buzz_baseMaxDistanceForWanderAP; // for wanderAroundPoint
+    public float buzz_maxMaxDistanceForWanderAP;
+    public float buzz_minMaxDistanceForWanderAP;
+    public float buzz_maxDistanceIncrementAmount;
+    public float buzz_angularSpeed;
+    public float buzz_rotationConstraintX;
+    public float buzz_rotationConstraintZ;
+    public float obs_avoidDistance;
+    public float obs_rayLength;
+
+    public float wander_radius;
+    public float wander_circleOffset;
+    public float wander_rate;
+    public float colAvoidance_detectionRadius;
+    public float colAvoidance_beeColliderRadius;
+
+
+
+
 
     [Header("Go Params")]
     public int idealNeighborCount;
