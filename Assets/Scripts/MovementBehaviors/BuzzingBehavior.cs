@@ -14,6 +14,7 @@ public class BuzzingBehavior : PrioritySteering
     private ObstacleAndWallAvoidanceBehavior obstacleAvoidance;
     private WanderAroundPointBehavior wanderAroundPoint;
     private CollisionAvoidanceBehavior collisionAvoidance;
+    private WanderBehavior testWanderBehavior;
     // and one behavior for the rotation
     private LookWhereYouAreGoingBehavior lookWhereYouAreGoing;
     private Vector3 centerPoint;
@@ -36,15 +37,16 @@ public class BuzzingBehavior : PrioritySteering
                                                                  obstacleAvoidanceLayerMask);
         wanderAroundPoint = new WanderAroundPointBehavior(currentBuzzingRadius, centerPoint, rootTransform,
                                                             swarmParams.buzz_maxAcceleration, swarmParams.wander_radius,
-                                                            swarmParams.wander_circleOffset, swarmParams.wander_rate);
+                                                            swarmParams.wander_circleOffset, swarmParams.wander_rate, rigidBody);
         collisionAvoidance = new CollisionAvoidanceBehavior(rootTransform, rigidBody, swarmParams.buzz_maxAcceleration,
                                                             swarmParams.colAvoidance_detectionRadius, swarmParams.colAvoidance_beeColliderRadius,
                                                             collisionAvoidanceLayerMask);
+        testWanderBehavior = new WanderBehavior(swarmParams.wander_radius, swarmParams.wander_circleOffset, swarmParams.wander_rate, swarmParams.buzz_maxAcceleration, rootTransform, rigidBody);
         
-        groups = new List<ISteeringBehavior> { wanderAroundPoint };
+        groups = new List<ISteeringBehavior> { obstacleAvoidance, collisionAvoidance, wanderAroundPoint };
 
-        lookWhereYouAreGoing = new LookWhereYouAreGoingBehavior(rootTransform, rigidBody, swarmParams.buzz_angularSpeed,
-                                                                swarmParams.buzz_rotationConstraintX, swarmParams.buzz_rotationConstraintZ);
+        lookWhereYouAreGoing = new LookWhereYouAreGoingBehavior(rootTransform, rigidBody, swarmParams.buzz_angularSpeed);
+                                                               
 
     }
 

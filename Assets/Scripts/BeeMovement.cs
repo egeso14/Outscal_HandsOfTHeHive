@@ -55,14 +55,26 @@ public class BeeMovement : MonoBehaviour
         var steeringOutput = currentBehavior.GetSteering();
         //currentBehavior.Update(steeringOutput);
         body.linearVelocity += steeringOutput.linear;
+        rootTransform.localRotation = steeringOutput.angular * rootTransform.localRotation;
+        ClampToAcceptableRanges(rootTransform, body);
+  
 
+    }
+
+    private void ClampToAcceptableRanges(Transform rootTransform, Rigidbody body)
+    {
         if (body.linearVelocity.sqrMagnitude > MathU.Square(swarmParams.beeSpeedCap))
         {
+            Debug.Log("Had to manually cap velocity");
             body.linearVelocity = body.linearVelocity.normalized * swarmParams.beeSpeedCap;
         }
 
-
-        rootTransform.localRotation = steeringOutput.angular * rootTransform.localRotation;
+        Vector3 euler = rootTransform.rotation.eulerAngles;
+        euler.x = euler.x > 180 ? euler.x - 360: euler.x;
+        euler.z = euler.z > 180 ? euler.z -360 : euler.z;
+        euler.x = Mathf.Clamp(euler.x, -swarmParams.beeRotationConstraintX, swarmParams.beeRotationConstraintX);
+        euler.z = Mathf.Clamp(euler.z, -swarmParams.beeRotationConstraintZ, swarmParams.beeRotationConstraintZ);
+        rootTransform.localRotation = Quaternion.Euler(euler);
 
     }
 

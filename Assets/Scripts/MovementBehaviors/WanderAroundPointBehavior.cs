@@ -10,13 +10,13 @@ public class WanderAroundPointBehavior : BlendedSteering
     private Transform rootTransform;
     private SteeringOutput lastOutput;
     public WanderAroundPointBehavior(float maxDistance, Vector3 centerPoint, Transform rootTransform, float maxAcceleration,
-                                    float wanderBehaviorRadius, float wanderBehaviorCircleOffset, float wanderBehaviorRate) : base(maxAcceleration, 0)
+                                    float wanderBehaviorRadius, float wanderBehaviorCircleOffset, float wanderBehaviorRate, Rigidbody body) : base(maxAcceleration, 0)
     {
         this.centerPoint = centerPoint;
         this.maxDistance = maxDistance;
         this.rootTransform = rootTransform;
 
-        wanderBehavior = new WanderBehavior(wanderBehaviorRadius, wanderBehaviorCircleOffset, wanderBehaviorRate, maxAcceleration, rootTransform);
+        wanderBehavior = new WanderBehavior(wanderBehaviorRadius, wanderBehaviorCircleOffset, wanderBehaviorRate, maxAcceleration, rootTransform, body);
         centerSeekBehavior = new SeekBehavior(rootTransform, centerPoint, maxAcceleration);
         // now we determine the weights of these behaviors
         var seekWeight = CalculateSeekWeight();
@@ -41,7 +41,8 @@ public class WanderAroundPointBehavior : BlendedSteering
     public override SteeringOutput GetSteering()
     {
         var seekWeight = CalculateSeekWeight();
-        //SetWeight(seekWeight, centerSeekBehavior);
+        SetWeight(seekWeight, centerSeekBehavior);
+        SetWeight(1 - seekWeight, wanderBehavior);
         lastOutput = base.GetSteering();
         return lastOutput;
     }

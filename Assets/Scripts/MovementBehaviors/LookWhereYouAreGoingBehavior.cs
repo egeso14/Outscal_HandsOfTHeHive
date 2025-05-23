@@ -4,8 +4,8 @@ public class LookWhereYouAreGoingBehavior : AlignBehavior
 {
     private Rigidbody rigidBody;
     public LookWhereYouAreGoingBehavior(Transform rootTransform, Rigidbody rigidBody,
-                                        float angularSpeed, float rotationConstraintX, float rotationConstraintZ)
-                                 : base(rootTransform, angularSpeed, rotationConstraintX, rotationConstraintZ)
+                                        float angularSpeed)
+                                        : base(rootTransform, angularSpeed)
     {
         this.rigidBody = rigidBody;
     }

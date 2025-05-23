@@ -83,15 +83,10 @@ public class SwarmParameters : ScriptableObject
 
 
     [Header("Universal Params")]
-    public float detectionRadius;
     public float beeSpeedCap; // has to be less than the overlap sphere radius
-    public float cohesionMaxRange; // can be smaller if we have more bees
-    public float cohesionMinRange;
-  
-    public float avoidanceMaxRange;
-    public float avoidanceMinRange;
-    public int detectNumForCohesion;
-    public float targetDistance;
+    public float beeRotationConstraintX;
+    public float beeRotationConstraintY;
+    public float beeRotationConstraintZ;
 
 
     [Header("BuzzingBehavior Params")]
@@ -102,8 +97,6 @@ public class SwarmParameters : ScriptableObject
     public float buzz_minMaxDistanceForWanderAP;
     public float buzz_maxDistanceIncrementAmount;
     public float buzz_angularSpeed;
-    public float buzz_rotationConstraintX;
-    public float buzz_rotationConstraintZ;
     public float obs_avoidDistance;
     public float obs_rayLength;
 

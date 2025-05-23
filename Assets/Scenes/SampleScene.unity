@@ -884,10 +884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5292748509150375382, guid: b741ef1d2a3fb844abc60d6db151e639, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1003130713}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7791607975242654719, guid: b741ef1d2a3fb844abc60d6db151e639, type: 3}
       insertIndex: -1
@@ -964,50 +961,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1003130711
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1003130713}
-  - component: {fileID: 1003130712}
-  m_Layer: 7
-  m_Name: BeeFlyZoneBoundaries
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1003130712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003130711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 870cd1d51e65b054195b5e36bb25ded3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1003130713
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003130711}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.65, y: -7.43, z: 0.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1255084901}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1255084899 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7791607975242654719, guid: b741ef1d2a3fb844abc60d6db151e639, type: 3}
@@ -1026,11 +979,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beePrefab: {fileID: 2516235140028973870, guid: 2673244462bbddc438b362367750be96, type: 3}
---- !u!4 &1255084901 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5292748509150375382, guid: b741ef1d2a3fb844abc60d6db151e639, type: 3}
-  m_PrefabInstance: {fileID: 917659940}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1373143035
 GameObject:
   m_ObjectHideFlags: 0

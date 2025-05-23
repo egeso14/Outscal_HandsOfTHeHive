@@ -11,12 +11,10 @@ public class AlignBehavior : ISteeringBehavior
     protected float rotationConstraintZ;
     protected bool isCompleted;
 
-    public AlignBehavior(Transform rootTransform, float angularSpeed, float rotationConstraintX, float rotationConstraintZ)
+    public AlignBehavior(Transform rootTransform, float angularSpeed)
     {
         this.rootTransform = rootTransform;
         this.angularSpeed = angularSpeed;
-        this.rotationConstraintX = rotationConstraintX;
-        this.rotationConstraintZ = rotationConstraintZ;
         target = Vector3.zero;
     }
 
@@ -38,18 +36,21 @@ public class AlignBehavior : ISteeringBehavior
     {
         // clamp the target rotation
         Quaternion fullRotation = Quaternion.FromToRotation(Vector3.forward, target);
-        Vector3 eulerAngles = fullRotation.eulerAngles;
+        /*Vector3 eulerAngles = fullRotation.eulerAngles;
         eulerAngles.x = NormalizeAngle(eulerAngles.x);
         eulerAngles.z = NormalizeAngle(eulerAngles.z);
         eulerAngles.x = Mathf.Clamp(eulerAngles.x, -1 * rotationConstraintX, rotationConstraintX);
         eulerAngles.z = Mathf.Clamp(eulerAngles.z, -1 * rotationConstraintZ, rotationConstraintZ);
+        Quaternion clampedFullRotation = Quaternion.Euler(eulerAngles);*/
+        // will do clamping post rotation calculation in bee movement
 
-        Quaternion clampedFullRotation = Quaternion.Euler(eulerAngles);
-        float angle = Quaternion.Angle(rootTransform.rotation, clampedFullRotation);
+
+
+        float angle = Quaternion.Angle(rootTransform.rotation, fullRotation);
 
         // determine how much of this rotation angle we can achieve this cycle
         float k = Mathf.Min(angularSpeed * Time.fixedDeltaTime / angle, 1);
-        Quaternion actualRotation = Quaternion.Slerp(rootTransform.rotation, clampedFullRotation, k);
+        Quaternion actualRotation = Quaternion.Slerp(rootTransform.rotation, fullRotation, k);
         return Quaternion.Inverse(rootTransform.rotation) * actualRotation;
     }
     private float NormalizeAngle(float angle)
