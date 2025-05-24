@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelConfig", menuName = "Scriptable Objects/LevelConfig")]
@@ -42,6 +43,7 @@ public class LevelConfig : ScriptableObject
     [SerializeField] public float flyZoneDepth;
     [SerializeField] public float beeSpawnInterval;
     [SerializeField] public int maxBees;
+    [SerializeField] public List<LayerMask> selectableLayers;
 
 
     // LevelSetup
