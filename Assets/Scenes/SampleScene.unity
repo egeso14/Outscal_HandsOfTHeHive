@@ -454,6 +454,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 508719798023697637, guid: c0ec16f6c380b344c8eedc26d10dda26, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1581837417084454112, guid: c0ec16f6c380b344c8eedc26d10dda26, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.43
@@ -687,7 +691,7 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: c24adf78471d5504f86e5ae259f4b8dd, type: 2}
@@ -1234,8 +1238,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2031120657}
+  - component: {fileID: 2031120658}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SelectModes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1256,6 +1261,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2031120658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031120656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5435c51ed8e0f46b7d8832e1578c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputReader: {fileID: 11400000, guid: 47ed2fba2b67d124192aabb9bbca7d19, type: 2}
+  selectableLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  length_RayFromScreenToWorld: 15
 --- !u!1001 &2040774769
 PrefabInstance:
   m_ObjectHideFlags: 0

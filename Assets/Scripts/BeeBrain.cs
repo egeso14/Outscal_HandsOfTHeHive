@@ -51,7 +51,6 @@ public class BeeBrain : MonoBehaviour
         nonBlurCamera = cameraObject.GetComponent<Camera>();
         Debug.Assert(nonBlurCamera != null);
 
-        AddControllerCallbacks();
     }
 
 
@@ -69,24 +68,20 @@ public class BeeBrain : MonoBehaviour
 
     private void ResetStrategyToDefault()
     {
-        strategyData = new StrategyData() { strategy = Strategy.Buzz};
+        strategyData = new StrategyData() { strategy = Strategy.Buzz };
     }
 
-    private void AddControllerCallbacks()
+    public void InformOfCommand(CommandData commandData)
     {
-        inputReader.SelectEvent += TriggerGoStrategy;
+        strategyData = new StrategyData
+        {
+            strategy = Strategy.Go,
+            targetPos = commandData.goCommandTarget
+        };
+
+        movement.InformOfStrategy(strategyData);
+
+
+
     }
-
-    private void TriggerGoStrategy(Vector2 screenPos)
-    {
-        // we need to get how far in the z dimension the background is from our camera
-        LayerMask backgroundMask = LayerMask.GetMask("Background");
-
-        
-        Physics.Raycast(nonBlurCamera.transform.position, nonBlurCamera.transform.forward, out RaycastHit hitInfo, backgroundMask);
-        Vector3 worldPos = nonBlurCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, hitInfo.distance));
-        Debug.Log(worldPos);
-        strategyData = new StrategyData() { strategy = Strategy.Go, targetPos = worldPos };
-    }
-
 }

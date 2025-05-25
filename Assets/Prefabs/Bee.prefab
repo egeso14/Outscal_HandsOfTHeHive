@@ -2807,7 +2807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2502847076553013491}
-  - component: {fileID: 2532849881863974917}
+  - component: {fileID: 34527321792242085}
   m_Layer: 6
   m_Name: customControl
   m_TagString: Untagged
@@ -2831,7 +2831,7 @@ Transform:
   - {fileID: 5589920554070813831}
   m_Father: {fileID: 6618042649050548836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2532849881863974917
+--- !u!136 &34527321792242085
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2851,7 +2851,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1
-  m_Height: 0
+  m_Height: 0.1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5614636348480092313
@@ -3123,6 +3123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1348458513702300673}
   - component: {fileID: 1412040907888684833}
+  - component: {fileID: 7234977841404154188}
   m_Layer: 6
   m_Name: Bee
   m_TagString: Untagged
@@ -3191,7 +3192,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300000, guid: dd2276d982b581b44809c609f144cfe4, type: 3}
   m_Bones:
@@ -3264,6 +3265,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.032118753, y: -0.010703895, z: 0.000000014901161}
     m_Extent: {x: 0.22313292, y: 0.13328217, z: 0.22684316}
   m_DirtyAABB: 0
+--- !u!114 &7234977841404154188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5845009684649298043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349e0f6fff8083741bee9c4c6f4ef374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultRenderingMask:
+    serializedVersion: 0
+    m_Bits: 1
+  highlightRenderingMask:
+    serializedVersion: 0
+    m_Bits: 257
 --- !u!1 &5902194309002980979
 GameObject:
   m_ObjectHideFlags: 0
