@@ -31,7 +31,7 @@ MonoBehaviour:
   wander_circleOffset: 0.6
   wander_rate: 2
   colAvoidance_detectionRadius: 1.4
-  colAvoidance_beeColliderRadius: 0.2
+  colAvoidance_beeColliderRadius: 0.3
   g_predictivePath_pathOffset: 3
   g_predictivePath_predictionTime: 0.1
   g_predictivePath_maxAcceleration: 0.1
