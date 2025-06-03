@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        DeterminePosition();
+        //DeterminePosition();
         maxBeesInScene = LevelConfig.instance.maxBees;
         spawnTimer = new Timer(LevelConfig.instance.beeSpawnInterval);
         beeSpawnPosition = LevelConfig.instance.beeSpawnLocation;
@@ -31,8 +31,6 @@ public class Spawner : MonoBehaviour
         var renderer = GetComponentInChildren<Renderer>();
         var bounds = renderer.bounds;
 
-        transform.position = beeSpawnPoint + hiveDistanceToSpawn
-                            + new Vector3(0, bounds.extents.y, 0);
     }
 
     private void MaybeSpawn()
@@ -44,7 +42,7 @@ public class Spawner : MonoBehaviour
         spawnTimer.TickTimer();
         if (spawnTimer.Check())
         {
-            Instantiate(beePrefab, beeSpawnPosition, Quaternion.identity);
+            Instantiate(beePrefab, transform.position, Quaternion.identity);
         }
     }
 }

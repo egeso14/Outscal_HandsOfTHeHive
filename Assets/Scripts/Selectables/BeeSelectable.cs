@@ -10,9 +10,9 @@ public class BeeSelectable : Selectable
 
     private void Start()
     {
-        meshRenderer = GetComponent<SkinnedMeshRenderer>();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         Debug.Assert(meshRenderer != null);
-        BeeBrain beeBrain = GetComponent<BeeBrain>();
+        beeBrain = GetComponent<BeeBrain>();
         Debug.Assert(beeBrain != null);
 
 
@@ -26,14 +26,14 @@ public class BeeSelectable : Selectable
     }
     protected override void RespondToSelection()
     {
-        meshRenderer.renderingLayerMask = highlightRenderingMask;
+        BeeHighlightManager.AddOutlineBorderToMe(gameObject);
         CommandEngine.commandBroadcast += CommunicateCommand;
     }
 
     protected override void RespondToDeselection()
     {
-       meshRenderer.renderingLayerMask = defaultRenderingMask;
-       CommandEngine.commandBroadcast -= CommunicateCommand;
+        BeeHighlightManager.RemoveOutlineBorderFromMe(gameObject);
+        CommandEngine.commandBroadcast -= CommunicateCommand;
     }
 
     private void CommunicateCommand(CommandData commandData)

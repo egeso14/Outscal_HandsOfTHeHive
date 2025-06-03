@@ -32,8 +32,8 @@ public class LevelConfig : ScriptableObject
     //Camera
     [SerializeField] public float baseCameraDistance;
     [SerializeField] public float baseCameraSpeed;
-    [SerializeField] public float maxCameraZoomInFactor;
-    [SerializeField] public float maxCameraZoomOutFactor;
+    [SerializeField] public float cameraMovementRange;
+
 
     //Background
     [SerializeField] public Vector2 backgroundDimensions;
@@ -49,5 +49,10 @@ public class LevelConfig : ScriptableObject
     // LevelSetup
     [SerializeField] public Vector2 hiveDistanceToSpawnPoint;
     [SerializeField] public float navmeshEdgeLength;
+    [SerializeField] public float navmeshEdgeDistanceFromObstacles;
+
+    // SelectRadius
+    [SerializeField] public float clickRadius;
+
     public Vector3 beeSpawnLocation;
 }

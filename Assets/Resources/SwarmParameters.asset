@@ -12,24 +12,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db9eb76f419ee14ab01ff29f65a4c4c, type: 3}
   m_Name: SwarmParameters
   m_EditorClassIdentifier: 
-  beeSpeedCap: 0.8
+  beeSpeedCap: 1.4
   beeRotationConstraintX: 50
   beeRotationConstraintY: 0
   beeRotationConstraintZ: 0
+  flockToRadius: 1
   buzz_maxAcceleration: 0.08
-  buzz_beeDensityPerUnitRadius: 5
+  buzz_beeDensityPerUnitRadius: 8
   buzz_baseMaxDistanceForWanderAP: 1
   buzz_maxMaxDistanceForWanderAP: 4
   buzz_minMaxDistanceForWanderAP: 0.2
   buzz_maxDistanceIncrementAmount: 0.2
-  buzz_angularSpeed: 30
-  obs_avoidDistance: 0.4
-  obs_rayLength: 0.6
+  buzz_angularSpeed: 120
+  obs_avoidDistance: 2.4
+  obs_rayLength: 2
+  obs_maxAcceleration: 0.12
   wander_radius: 0.2
   wander_circleOffset: 0.6
-  wander_rate: 0.57
-  colAvoidance_detectionRadius: 0.8
+  wander_rate: 2
+  colAvoidance_detectionRadius: 1.4
   colAvoidance_beeColliderRadius: 0.2
+  g_predictivePath_pathOffset: 3
+  g_predictivePath_predictionTime: 0.1
+  g_predictivePath_maxAcceleration: 0.1
+  g_p_linePath_pathLookAhead: 3
+  g_colAvoidance_maxAcceleration: 0.04
+  g_colAvoidance_detectionRadius: 0.8
+  g_colAvoidance_collisionRadius: 0.15
+  g_colAvoidance_detectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  g_lookWhereYouAreGoing_angularSpeed: 60
+  f_b_cohesionTreshold: 1
+  f_b_seperationTreshold: 0.4
+  f_b_cohesionDecayCoefficient: 2
+  f_b_seperationDecayCoefficient: 5
+  f_b_maxAcceleration: 0.4
+  f_b_pursuitApproachDistance: 0.3
+  f_b_pursuitMaxPredictionTime: 0.2
+  f_boidsDetectionRadius: 1.5
+  f_b_p_arriveStopRadius: 0.25
+  f_b_p_arriveSlowRadius: 0.75
+  f_b_p_arriveTimeToReach: 1
+  f_WAO_avoidDistance: 0.8
+  f_WAO_rayLength: 0.6
+  f_WAO_raycastMask:
+    serializedVersion: 2
+    m_Bits: 2176
+  f_WAO_angularSpeed: 35
+  f_b_pursuitBaseWeight: 0.6
+  f_b_pursuitBaseDistance: 1.2
   idealNeighborCount: 6
   visionDistance: 1.5
   visionSemiAngle: 100

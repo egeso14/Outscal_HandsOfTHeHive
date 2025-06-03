@@ -18,9 +18,10 @@ public class CommandData
 /// </summary>
 public class CommandEngine : MonoBehaviour
 {
-
-    public static CommandEngine instance; 
+    public LayerMask raycastLayerMask;
+    public static CommandEngine instance;
     public static event Action<CommandData> commandBroadcast;
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -33,6 +34,25 @@ public class CommandEngine : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    void Start()
+    {
+        AssignCallbacks();
+    }
 
-    
+    private void AssignCallbacks()
+    {
+        ClickRouter.mapClickEvent += MapClickCallback;
+    }
+
+    private void MapClickCallback(Vector3 positionOnMap)
+    {
+        commandBroadcast?.Invoke(new CommandData
+        {
+            commandType = CommandType.Go,
+            goCommandTarget = positionOnMap
+        });
+
+    }
+
+
 }

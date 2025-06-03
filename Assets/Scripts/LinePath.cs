@@ -6,13 +6,34 @@ public class LinePath : IPath
 {
     public List<Vector3> points;
     private int pathLookAhead;
-    public LinePath(List<Vector3> points)
+    public LinePath(List<Vector3> points, int pathLookAhead)
     {
         this.points = points;
+        this.pathLookAhead = pathLookAhead;
     }
     public float GetParameter(Vector3 position, float lastParam)
     {
-        for (int i = 0; i < lastParam + pathLookAhead)
+        float bestSqrDist = float.MaxValue;
+        int bestIndex = -1;
+        for (int i = (int)lastParam; i < lastParam + pathLookAhead; i++)
+        {
+            if (i > points.Count - 1)
+            {
+                break; // Avoid going out of bounds
+            }
+            float sqrDist = (position - points[i]).sqrMagnitude;
+            // calculate the closest point on the list to position ahead of the lastParam
+            if (sqrDist < bestSqrDist)
+            {
+                bestSqrDist = sqrDist;
+                bestIndex = i;
+            }
+        }
+        if (bestIndex == -1)
+        {
+            return lastParam; // No valid point found, return the last parameter
+        }
+        return bestIndex;
     }
     public Vector3 GetPosition(float param)
     {
@@ -21,9 +42,23 @@ public class LinePath : IPath
             return points[points.Count - 1];
         }
 
-        Vector3 prev = points[(int)param];
+        return points[(int)param];
+        /*Vector3 prev = points[(int)param];
         Vector3 next = points[(int)param + 1];
-        return points[(int)param] + (next - prev).normalized * (param - (int) param);
+        return points[(int)param] + (next - prev).normalized * (param - (int) param);*/
+    }
+
+    public bool IsEndOfPath(float param)
+    {
+        return param >= points.Count - 1;
+    }
+
+    public void DebugPath()
+    {
+        for (int i = 0; i < points.Count - 1; i++)
+        {
+            Debug.DrawLine(points[i], points[i + 1], Color.cyan);
+        }
     }
 
     private static Vector3 ClosestPointOnSegment(Vector3 A, Vector3 B, Vector3 P)

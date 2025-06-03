@@ -87,6 +87,7 @@ public class SwarmParameters : ScriptableObject
     public float beeRotationConstraintX;
     public float beeRotationConstraintY;
     public float beeRotationConstraintZ;
+    public float flockToRadius;
 
 
     [Header("BuzzingBehavior Params")]
@@ -99,6 +100,7 @@ public class SwarmParameters : ScriptableObject
     public float buzz_angularSpeed;
     public float obs_avoidDistance;
     public float obs_rayLength;
+    public float obs_maxAcceleration;
 
     public float wander_radius;
     public float wander_circleOffset;
@@ -106,15 +108,50 @@ public class SwarmParameters : ScriptableObject
     public float colAvoidance_detectionRadius;
     public float colAvoidance_beeColliderRadius;
 
+    [Header("GoThereBehavior Params")]
+    public float g_predictivePath_pathOffset;
+    public float g_predictivePath_predictionTime;
+    public float g_predictivePath_maxAcceleration;
+    public int g_p_linePath_pathLookAhead;
+    public float g_colAvoidance_maxAcceleration;
+    public float g_colAvoidance_detectionRadius;
+    public float g_colAvoidance_collisionRadius;
+    public LayerMask g_colAvoidance_detectionLayerMask;
+    public float g_lookWhereYouAreGoing_angularSpeed;
+
+    [Header("FlockingBehavior Params")]
+    public float f_b_cohesionTreshold;
+    public float f_b_seperationTreshold;
+    public float f_b_cohesionDecayCoefficient;
+    public float f_b_seperationDecayCoefficient;
+    public float f_b_maxAcceleration;
+    public float f_b_pursuitApproachDistance;
+    public float f_b_pursuitMaxPredictionTime;
+    public float f_boidsDetectionRadius;
+    public float f_b_p_arriveStopRadius;
+    public float f_b_p_arriveSlowRadius;
+    public float f_b_p_arriveTimeToReach;
+    public float f_WAO_avoidDistance;
+    public float f_WAO_rayLength;
+    public LayerMask f_WAO_raycastMask;
+    public float f_WAO_angularSpeed;
+    public float f_b_pursuitBaseWeight;
+    public float f_b_pursuitBaseDistance;
+
+
+
+
+
+    public int idealNeighborCount;
+    public float visionDistance;
+    public float visionSemiAngle;
+    public int boidsNearbyToBeAlone;
 
 
 
 
     [Header("Go Params")]
-    public int idealNeighborCount;
-    public float visionDistance;
-    public float visionSemiAngle;
-    public int boidsNearbyToBeAlone;
+    
 
     public float cohesionRadius;
     [HideInInspector] public float squaredCohesionRadius;

@@ -10,11 +10,11 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float zoomLerpConstant;
     [SerializeField] private float moveLerpConstant;
     [SerializeField] private float cameraRotationSpeed;
-    [SerializeField] private float cameraMovementRange_Z;
-    [SerializeField] private float cameraDefaultDistance_Z;
+    private float cameraMovementRange_Z;
+    private float cameraDefaultDistance_Z;
 
-    [SerializeField, ReadOnly(true)] private Bounds backgroundBounds;
-    [SerializeField, ReadOnly(true)] private Bounds cameraMovementBounds;
+    private Bounds backgroundBounds;
+    private Bounds cameraMovementBounds;
 
     [SerializeField] private InputReader inputReader;
 
@@ -26,6 +26,12 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         myCamera = GetComponent<Camera>();
+        LevelConfig levelConfig = LevelConfig.instance;
+        Debug.Assert(levelConfig != null, "LevelConfig instance is null in CameraController.");
+        cameraMovementRange_Z = levelConfig.cameraMovementRange;
+        cameraDefaultDistance_Z = levelConfig.baseCameraDistance;
+
+
         FindBackgroundBounds();
         CreateCameraMovementBounds();
         SetStartingPosition();
@@ -102,7 +108,7 @@ public class CameraController : MonoBehaviour
             Vector3 targetPosition;
             while (true)
             {
-                targetPosition = transform.position + moveDirection;
+                targetPosition = transform.position + moveDirection * cameraMovementSpeed;
                 float newX = Mathf.Lerp(transform.position.x, targetPosition.x, moveLerpConstant);
                 float newY = Mathf.Lerp(transform.position.y, targetPosition.y, moveLerpConstant);
                 transform.position = new Vector3(newX, newY, transform.position.z);

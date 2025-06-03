@@ -1098,6 +1098,7 @@ GameObject:
   - component: {fileID: 5473248718530221059}
   - component: {fileID: 7403853561480614161}
   - component: {fileID: -1026097409357776360}
+  - component: {fileID: 7840752931728635494}
   m_Layer: 6
   m_Name: Bee
   m_TagString: Bee
@@ -1197,7 +1198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStrategy: 0
-  inputReader: {fileID: 11400000, guid: 47ed2fba2b67d124192aabb9bbca7d19, type: 2}
+  rootTransform: {fileID: 2502847076553013491}
 --- !u!54 &7403853561480614161
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1238,6 +1239,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 2502847076553013491}
+--- !u!114 &7840752931728635494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2516235140028973870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349e0f6fff8083741bee9c4c6f4ef374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultRenderingMask:
+    serializedVersion: 0
+    m_Bits: 1
+  highlightRenderingMask:
+    serializedVersion: 0
+    m_Bits: 2048
 --- !u!1 &2530689243757247488
 GameObject:
   m_ObjectHideFlags: 0
@@ -3123,7 +3142,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1348458513702300673}
   - component: {fileID: 1412040907888684833}
-  - component: {fileID: 7234977841404154188}
   m_Layer: 6
   m_Name: Bee
   m_TagString: Untagged
@@ -3265,24 +3283,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.032118753, y: -0.010703895, z: 0.000000014901161}
     m_Extent: {x: 0.22313292, y: 0.13328217, z: 0.22684316}
   m_DirtyAABB: 0
---- !u!114 &7234977841404154188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5845009684649298043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 349e0f6fff8083741bee9c4c6f4ef374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultRenderingMask:
-    serializedVersion: 0
-    m_Bits: 1
-  highlightRenderingMask:
-    serializedVersion: 0
-    m_Bits: 257
 --- !u!1 &5902194309002980979
 GameObject:
   m_ObjectHideFlags: 0

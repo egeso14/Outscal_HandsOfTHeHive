@@ -29,7 +29,7 @@ public class InputReader : ScriptableObject, InputSystem_Actions.IPlayerActions,
     public event Action<float> ZoomEvent;
     public event Action PauseEvent;
     public event Action ResumeEvent;
-    public event Action<Vector2> SelectEvent;
+    public event Action<Vector2> ScreenClickEvent;
 
     public void SetGameplay()
     {
@@ -144,6 +144,6 @@ public class InputReader : ScriptableObject, InputSystem_Actions.IPlayerActions,
 
     public void OnSelect(InputAction.CallbackContext context)
     {
-        SelectEvent.Invoke(Input.mousePosition);
+        ScreenClickEvent.Invoke(Input.mousePosition);
     }
 }

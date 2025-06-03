@@ -17,6 +17,7 @@ public class NavmeshCell
     public float hScore;
     public float gScore;
     public NavmeshCell previousOnPath;
+    
 
     public float GetFScore()
     {
@@ -67,7 +68,7 @@ public class Navmesh
         edgeLength = levelConfig.navmeshEdgeLength;
         levelCenter = levelConfig.backgroundCenterPositon;
         levelDimensions = levelConfig.backgroundDimensions;
-        distanceToFlyzoneEdge = levelConfig.flyZoneDepth;
+        distanceToFlyzoneEdge = levelConfig.baseCameraDistance;
         LayerMask obstacleMask = LayerMask.GetMask("Obstacle");
 
         float raycastStartZ = levelCenter.z - distanceToFlyzoneEdge;
@@ -97,7 +98,7 @@ public class Navmesh
                 Vector3 raycastEnd = new Vector3(posX, posY, raycastEndZ);
                 // now we check whether there is anything at this location
 
-                if (Physics.Raycast(raycastStart, raycastEnd - raycastStart, distanceToFlyzoneEdge, obstacleMask)) continue;
+                if (Physics.SphereCast(raycastStart, levelConfig.navmeshEdgeDistanceFromObstacles /2, raycastEnd - raycastStart, out RaycastHit hitInfo, distanceToFlyzoneEdge, obstacleMask)) continue;
 
                 cells[y, x] = new NavmeshCell(raycastEnd);
             }
@@ -197,6 +198,14 @@ public class Navmesh
         // first find the closest nodes to the from and to locations
         NavmeshCell startCell = GetClosestCell(from);
         NavmeshCell endCell = GetClosestCell(to);
+
+        //if either is null return empty path
+        if (startCell == null || endCell == null)
+        {
+            Debug.LogWarning("Start or end cell is null, returning empty path.");
+            return new List<Vector3>();
+        }
+
         Debug.Log("Start cell position:" + startCell.position);
         Debug.Log("End cell position:" + endCell.position);
         var openSet = new PriorityQueue<NavmeshCell>();
@@ -272,7 +281,52 @@ public class Navmesh
         xIndex = Mathf.Clamp(xIndex, 0, cells.GetLength(1) - 1);
         yIndex = Mathf.Clamp(yIndex, 0, cells.GetLength(0) - 1);
 
-        return cells[yIndex, xIndex];
+        NavmeshCell foundCell = cells[yIndex, xIndex];
+
+        if (foundCell == null)
+        {
+            foundCell = SolveForNextClosestCell(xIndex, yIndex, worldPos);
+        }
+
+
+        return foundCell; // this will crash when the cell there is not instantiated because there is an obstacle there
+    }
+
+    private NavmeshCell SolveForNextClosestCell(int xIndex, int yIndex, Vector3 originalPos)
+    {
+        Vector2[] directionsToTry = new Vector2[] {
+            new Vector2(0, 1),   // Up
+            new Vector2(1, 0),   // Right
+            new Vector2(0, -1),  // Down
+            new Vector2(-1, 0)   // Left
+
+        };
+
+        float bestSqrDistance = float.MaxValue;
+        NavmeshCell bestCell = null;
+
+        for (int i = 0; i < directionsToTry.Length; i++)
+        {
+            int newX = xIndex + (int)directionsToTry[i].x;
+            int newY = yIndex + (int)directionsToTry[i].y;
+            if (newX >= 0 && newX < cells.GetLength(1) && newY >= 0 && newY < cells.GetLength(0))
+            {
+                NavmeshCell candidateCell = cells[newY, newX];
+                if (candidateCell != null)
+                {
+                    float sqrDistance = (candidateCell.position - originalPos).sqrMagnitude;
+                    if (sqrDistance < bestSqrDistance)
+                    {
+                        bestSqrDistance = sqrDistance;
+                        bestCell = candidateCell;
+                    }
+                }
+            }
+        }
+
+        return bestCell;
+
+
     }
 
     private List<Vector3> WalkBackToGeneratePath(NavmeshCell end, NavmeshCell start)

@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f37854a6a9af84e96da845b7efe5ac, type: 3}
   m_Name: LevelConfig
   m_EditorClassIdentifier: 
-  baseCameraDistance: 10
+  baseCameraDistance: 20
   baseCameraSpeed: 0
-  maxCameraZoomInFactor: 0
-  maxCameraZoomOutFactor: 0
-  backgroundDimensions: {x: 20, y: 20}
+  cameraMovementRange: 5
+  backgroundDimensions: {x: 60, y: 60}
   backgroundCenterPositon: {x: 0, y: 0, z: 0}
-  flyZoneDepth: 5
+  flyZoneDepth: 3.4
   beeSpawnInterval: 0.1
-  maxBees: 15
+  maxBees: 20
   selectableLayers:
   - serializedVersion: 2
     m_Bits: 64
   - serializedVersion: 2
     m_Bits: 2112
   hiveDistanceToSpawnPoint: {x: 1, y: 1}
-  navmeshEdgeLength: 0.5
-  beeSpawnLocation: {x: 0, y: 0, z: -2.5}
+  navmeshEdgeLength: 0.2
+  navmeshEdgeDistanceFromObstacles: 0.4
+  clickRadius: 0.05
+  beeSpawnLocation: {x: 0, y: 0, z: -1.5}

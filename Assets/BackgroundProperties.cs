@@ -9,7 +9,7 @@ public class BackgroundProperties : MonoBehaviour
     {
         configObject = LevelConfig.instance;
         Debug.Assert(configObject != null, "Couldn't find config object");
-        //SetTransformScale();
+        SetTransformScale();
         //SetTransformPosition();
     }
 
@@ -20,7 +20,11 @@ public class BackgroundProperties : MonoBehaviour
         return renderer.bounds;
     }
 
-    public void SetTransformScale() => transform.localScale = configObject.backgroundDimensions;
+    public void SetTransformScale()
+    {
+        Vector3 scale = new Vector3(configObject.backgroundDimensions.x, configObject.backgroundDimensions.y, 1);
+        transform.localScale = scale;
+    }
     public void SetTransformPosition() => transform.position = configObject.backgroundCenterPositon;
 
 

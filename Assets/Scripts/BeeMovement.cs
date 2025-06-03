@@ -80,7 +80,10 @@ public class BeeMovement : MonoBehaviour
 
     void OnDrawGizmos()
     {
+
         currentBehavior.DebugBehavior();
+        Gizmos.color = Color.black ;
+        Gizmos.DrawLine(rootTransform.position, body.linearVelocity.normalized + rootTransform.position);
     }
     private void OnDrawGizmosSelected()
     {
@@ -116,10 +119,21 @@ public class BeeMovement : MonoBehaviour
                 steps.Enqueue(new BuzzingBehavior(rootTransform.position, rootTransform, body));
 
                 return steps;
-            case Strategy.Go:                
-                //steps.Enqueue(new FaceBehavior(rootTransform, strategyData.targetPos));
+            case Strategy.Go:
+                
+                steps.Enqueue(new GoThereBehavior(strategyData.targetPos, body, rootTransform));
                 
                 return steps;
+            case Strategy.Flock:
+                steps.Enqueue(new FlockingBehavior(rootTransform, swarmParams.f_b_maxAcceleration, body, strategyData.rigidbody, strategyData.transform,
+                                                swarmParams.g_predictivePath_predictionTime, swarmParams.f_b_pursuitApproachDistance, swarmParams.f_b_cohesionTreshold,
+                                                swarmParams.f_b_cohesionDecayCoefficient, swarmParams.f_b_seperationTreshold, swarmParams.f_b_seperationDecayCoefficient, swarmParams.f_boidsDetectionRadius,
+                                                swarmParams.beeSpeedCap, swarmParams.f_b_p_arriveStopRadius, swarmParams.f_b_p_arriveSlowRadius, swarmParams.f_b_p_arriveTimeToReach,
+                                                swarmParams.f_b_pursuitBaseWeight, swarmParams.f_b_pursuitBaseDistance,
+                                                swarmParams.f_WAO_avoidDistance, swarmParams.f_WAO_rayLength, swarmParams.f_WAO_raycastMask, swarmParams.angularSpeed));
+
+                return steps;
+
             default:
                 
                 return steps;
