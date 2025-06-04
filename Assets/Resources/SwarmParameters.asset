@@ -13,28 +13,29 @@ MonoBehaviour:
   m_Name: SwarmParameters
   m_EditorClassIdentifier: 
   beeSpeedCap: 1.4
-  beeRotationConstraintX: 50
+  beeRotationConstraintX: 60
   beeRotationConstraintY: 0
   beeRotationConstraintZ: 0
   flockToRadius: 1
-  buzz_maxAcceleration: 0.08
+  buzz_maxAcceleration: 0.15
   buzz_beeDensityPerUnitRadius: 8
   buzz_baseMaxDistanceForWanderAP: 1
   buzz_maxMaxDistanceForWanderAP: 4
   buzz_minMaxDistanceForWanderAP: 0.2
   buzz_maxDistanceIncrementAmount: 0.2
-  buzz_angularSpeed: 120
+  buzz_angularSpeed: 180
   obs_avoidDistance: 2.4
   obs_rayLength: 2
   obs_maxAcceleration: 0.12
+  buzz_wanderAP_centerSeekMaxWeight: 0.75
   wander_radius: 0.2
   wander_circleOffset: 0.6
   wander_rate: 2
-  colAvoidance_detectionRadius: 1.4
-  colAvoidance_beeColliderRadius: 0.3
+  colAvoidance_detectionRadius: 1.6
+  colAvoidance_beeColliderRadius: 0.15
   g_predictivePath_pathOffset: 3
-  g_predictivePath_predictionTime: 0.1
-  g_predictivePath_maxAcceleration: 0.1
+  g_predictivePath_predictionTime: 0.2
+  g_predictivePath_maxAcceleration: 0.08
   g_p_linePath_pathLookAhead: 3
   g_colAvoidance_maxAcceleration: 0.04
   g_colAvoidance_detectionRadius: 0.8
@@ -47,12 +48,12 @@ MonoBehaviour:
   f_b_seperationTreshold: 0.4
   f_b_cohesionDecayCoefficient: 2
   f_b_seperationDecayCoefficient: 5
-  f_b_maxAcceleration: 0.4
-  f_b_pursuitApproachDistance: 0.3
+  f_b_maxAcceleration: 0.3
+  f_b_pursuitApproachDistance: 0.27
   f_b_pursuitMaxPredictionTime: 0.2
   f_boidsDetectionRadius: 1.5
-  f_b_p_arriveStopRadius: 0.25
-  f_b_p_arriveSlowRadius: 0.75
+  f_b_p_arriveStopRadius: 0.2
+  f_b_p_arriveSlowRadius: 0.4
   f_b_p_arriveTimeToReach: 1
   f_WAO_avoidDistance: 0.8
   f_WAO_rayLength: 0.6
@@ -61,7 +62,8 @@ MonoBehaviour:
     m_Bits: 2176
   f_WAO_angularSpeed: 35
   f_b_pursuitBaseWeight: 0.6
-  f_b_pursuitBaseDistance: 1.2
+  f_b_pursuitBaseDistance: 0.4
+  f_speedCap: 3
   idealNeighborCount: 6
   visionDistance: 1.5
   visionSemiAngle: 100

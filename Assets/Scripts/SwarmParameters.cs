@@ -101,6 +101,7 @@ public class SwarmParameters : ScriptableObject
     public float obs_avoidDistance;
     public float obs_rayLength;
     public float obs_maxAcceleration;
+    public float buzz_wanderAP_centerSeekMaxWeight;
 
     public float wander_radius;
     public float wander_circleOffset;
@@ -137,7 +138,7 @@ public class SwarmParameters : ScriptableObject
     public float f_WAO_angularSpeed;
     public float f_b_pursuitBaseWeight;
     public float f_b_pursuitBaseDistance;
-
+    public float f_speedCap;
 
 
 

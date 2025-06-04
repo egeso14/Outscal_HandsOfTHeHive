@@ -7,12 +7,14 @@ public class CameraController : MonoBehaviour
 {
     private Camera myCamera;
     [SerializeField] private float cameraMovementSpeed;
-    [SerializeField] private float zoomLerpConstant;
+    private float zoomLerpConstant;
     [SerializeField] private float moveLerpConstant;
     [SerializeField] private float cameraRotationSpeed;
     private float cameraMovementRange_Z;
     private float cameraDefaultDistance_Z;
-
+    private float cameraZoomSpeed;
+    private float maxFOV;
+    private float minFOV;
     private Bounds backgroundBounds;
     private Bounds cameraMovementBounds;
 
@@ -30,7 +32,10 @@ public class CameraController : MonoBehaviour
         Debug.Assert(levelConfig != null, "LevelConfig instance is null in CameraController.");
         cameraMovementRange_Z = levelConfig.cameraMovementRange;
         cameraDefaultDistance_Z = levelConfig.baseCameraDistance;
-
+        cameraZoomSpeed = levelConfig.cameraZoomSpeed;
+        zoomLerpConstant = levelConfig.cameraZoomLerpConstant;
+        maxFOV = levelConfig.cameraMaxFOV;
+        minFOV = levelConfig.cameraMinFOV;
 
         FindBackgroundBounds();
         CreateCameraMovementBounds();
@@ -74,22 +79,22 @@ public class CameraController : MonoBehaviour
 
     private void OnZoom(float zoom)
     {
-        Vector3 movedPosition = Camera.main.transform.position + new Vector3(0, 0, zoom);
-        Vector3 inBoundsPosition = cameraMovementBounds.ClosestPoint(movedPosition);
+        float targetFOV = myCamera.fieldOfView + zoom * cameraZoomSpeed;
+        
         
         if (zoomCoroutine != null)
         {
             StopCoroutine(zoomCoroutine);
         }
 
-        zoomCoroutine = StartCoroutine(SmoothZoom(inBoundsPosition.z));
+        zoomCoroutine = StartCoroutine(SmoothZoom(targetFOV));
 
-        IEnumerator SmoothZoom(float targetZ)
+        IEnumerator SmoothZoom(float targetFOV)
         {
-            while (targetZ != transform.position.z)
+            while (targetFOV != myCamera.fieldOfView)
             {
-                float newZ = Mathf.Lerp(transform.position.z, targetZ, zoomLerpConstant);
-                transform.position = new Vector3 (transform.position.x, transform.position.y, newZ);
+                float newFOV = Mathf.Lerp(myCamera.fieldOfView, targetFOV, zoomLerpConstant);
+                myCamera.fieldOfView = Mathf.Clamp(newFOV, minFOV, maxFOV);
                 yield return null;
             }
         }

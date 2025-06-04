@@ -30,7 +30,7 @@ public class BoidsBehavior : BlendedSteering
         this.rootTransform = rootTransform;
         this.pursuitBaseWeight = pursuitBaseWeight;
         this.pursuitBaseDistance = pursuitBaseDistance;
-        cohesionBehavior = new CohesionBehavior(rootTransform, float.MaxValue, cohesionTreshold, cohesionDecayCoefficient);
+        cohesionBehavior = new CohesionBehavior(rootTransform, maxAcceleration, cohesionTreshold, cohesionDecayCoefficient);
         separationBehavior = new SeparationBehavior(rootTransform, seperationTreshold, seperationDecayCoefficient, float.MaxValue);
         pursueBehavior = new PursueBehavior(leaderRigidbody, leaderTransform, myRigidBody, rootTransform, float.MaxValue, maxPredictionTime, 
                                             approachDistance, maxSpeed, stopRadius, slowRadius, timeToReach);
@@ -38,7 +38,7 @@ public class BoidsBehavior : BlendedSteering
 
         behaviors = new List<BehaviorAndWeight>
         {
-            new BehaviorAndWeight(cohesionBehavior, 0.4f),
+            new BehaviorAndWeight(cohesionBehavior, 0.2f),
             new BehaviorAndWeight(separationBehavior, 1f),
             new BehaviorAndWeight(pursueBehavior, 0.6f)
         };

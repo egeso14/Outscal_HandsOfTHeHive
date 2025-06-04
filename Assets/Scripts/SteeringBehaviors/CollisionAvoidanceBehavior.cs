@@ -49,7 +49,7 @@ public class CollisionAvoidanceBehavior : ISteeringBehavior
             Vector3 relativeVelocity = otherBody.linearVelocity - rigidBody.linearVelocity;
             float timeOfClosestApproach = Vector3.Dot(relativePos, relativeVelocity) / relativeVelocity.sqrMagnitude;
             // will there be a collision
-            var closestDistance = relativePos.magnitude - timeOfClosestApproach * relativeVelocity.magnitude; // estimate of how far apart they will be
+            var closestDistance = (relativePos - timeOfClosestApproach * relativeVelocity).magnitude; // estimate of how far apart they will be
             if (closestDistance > 2 * collisionRadius)
             {
                 continue;

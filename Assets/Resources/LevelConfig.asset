@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCameraDistance: 20
   baseCameraSpeed: 0
-  cameraMovementRange: 5
+  cameraMovementRange: 20
+  cameraZoomSpeed: 10
+  cameraMaxFOV: 100
+  cameraMinFOV: 10
+  cameraZoomLerpConstant: 0.06
   backgroundDimensions: {x: 60, y: 60}
   backgroundCenterPositon: {x: 0, y: 0, z: 0}
   flyZoneDepth: 3.4
@@ -27,6 +31,6 @@ MonoBehaviour:
     m_Bits: 2112
   hiveDistanceToSpawnPoint: {x: 1, y: 1}
   navmeshEdgeLength: 0.2
-  navmeshEdgeDistanceFromObstacles: 0.4
+  navmeshEdgeDistanceFromObstacles: 0.8
   clickRadius: 0.05
-  beeSpawnLocation: {x: 0, y: 0, z: -1.5}
+  beeSpawnLocation: {x: 0, y: 0, z: -1.7}

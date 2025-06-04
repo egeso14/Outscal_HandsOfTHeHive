@@ -37,8 +37,8 @@ public class BuzzingBehavior : PrioritySteering
                                                                  obstacleAvoidanceLayerMask);
         wanderAroundPoint = new WanderAroundPointBehavior(currentBuzzingRadius, centerPoint, rootTransform,
                                                             swarmParams.buzz_maxAcceleration, swarmParams.wander_radius,
-                                                            swarmParams.wander_circleOffset, swarmParams.wander_rate, rigidBody);
-        collisionAvoidance = new CollisionAvoidanceBehavior(rootTransform, rigidBody, swarmParams.buzz_maxAcceleration * 3,
+                                                            swarmParams.wander_circleOffset, swarmParams.wander_rate, swarmParams.buzz_wanderAP_centerSeekMaxWeight, rigidBody);
+        collisionAvoidance = new CollisionAvoidanceBehavior(rootTransform, rigidBody, swarmParams.buzz_maxAcceleration * 5,
                                                             swarmParams.colAvoidance_detectionRadius, swarmParams.colAvoidance_beeColliderRadius,
                                                             collisionAvoidanceLayerMask);
         testWanderBehavior = new WanderBehavior(swarmParams.wander_radius, swarmParams.wander_circleOffset, swarmParams.wander_rate, swarmParams.buzz_maxAcceleration, rootTransform, rigidBody);

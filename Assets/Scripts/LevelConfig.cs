@@ -33,6 +33,10 @@ public class LevelConfig : ScriptableObject
     [SerializeField] public float baseCameraDistance;
     [SerializeField] public float baseCameraSpeed;
     [SerializeField] public float cameraMovementRange;
+    [SerializeField] public float cameraZoomSpeed;
+    [SerializeField] public float cameraMaxFOV;
+    [SerializeField] public float cameraMinFOV;
+    [SerializeField] public float cameraZoomLerpConstant;
 
 
     //Background

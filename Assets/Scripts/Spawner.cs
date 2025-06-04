@@ -4,9 +4,11 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject beePrefab;
-    
+    [SerializeField] private int beesToSpawn;
+    private int beesSpawned;
+
     private int maxBeesInScene;
-    private Vector3 beeSpawnPosition;
+
     private Timer spawnTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,7 +17,7 @@ public class Spawner : MonoBehaviour
         //DeterminePosition();
         maxBeesInScene = LevelConfig.instance.maxBees;
         spawnTimer = new Timer(LevelConfig.instance.beeSpawnInterval);
-        beeSpawnPosition = LevelConfig.instance.beeSpawnLocation;
+        beesSpawned = 0;
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class Spawner : MonoBehaviour
 
     private void MaybeSpawn()
     {
-        if (BeeBrain.numberOfActiveBees >= maxBeesInScene)
+        if (beesSpawned >= beesToSpawn)
         {
             return;
         }
@@ -43,6 +45,7 @@ public class Spawner : MonoBehaviour
         if (spawnTimer.Check())
         {
             Instantiate(beePrefab, transform.position, Quaternion.identity);
+            beesSpawned++;
         }
     }
 }

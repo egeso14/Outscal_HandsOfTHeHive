@@ -4,17 +4,20 @@ using UnityEngine;
 public class WanderAroundPointBehavior : BlendedSteering
 {
     private float maxDistance;
+    private float centerSeekMaxWeight;
     private Vector3 centerPoint;
     private WanderBehavior wanderBehavior;
     private SeekBehavior centerSeekBehavior;
     private Transform rootTransform;
     private SteeringOutput lastOutput;
     public WanderAroundPointBehavior(float maxDistance, Vector3 centerPoint, Transform rootTransform, float maxAcceleration,
-                                    float wanderBehaviorRadius, float wanderBehaviorCircleOffset, float wanderBehaviorRate, Rigidbody body) : base(maxAcceleration)
+                                    float wanderBehaviorRadius, float wanderBehaviorCircleOffset, float wanderBehaviorRate,
+                                    float centerSeekMaxWeight, Rigidbody body) : base(maxAcceleration)
     {
         this.centerPoint = centerPoint;
         this.maxDistance = maxDistance;
         this.rootTransform = rootTransform;
+        this.centerSeekMaxWeight = centerSeekMaxWeight;
 
         wanderBehavior = new WanderBehavior(wanderBehaviorRadius, wanderBehaviorCircleOffset, wanderBehaviorRate, maxAcceleration, rootTransform, body);
         centerSeekBehavior = new SeekBehavior(rootTransform, centerPoint, maxAcceleration);
@@ -34,7 +37,7 @@ public class WanderAroundPointBehavior : BlendedSteering
     {
         float sqrDistance = (rootTransform.position - centerPoint).sqrMagnitude;
         float k = Mathf.InverseLerp(MathU.Square(maxDistance/2), MathU.Square(maxDistance), sqrDistance);
-        k = Mathf.Clamp01(k);
+        k = Mathf.Clamp(k, 0, centerSeekMaxWeight);
         return k;
     }
 
