@@ -14,7 +14,7 @@ After writing more than a handful of level two and level three behaviors, I noti
 
 Using these cases as a simple starting point, I could write a Unity Editor Tool for easiy creating and attaching Steering Behaviors to Game Objects. There would still need to be a higher level system to handle mathcing AI decision to Behaviors, but this could also be left to the developer after creating their own mix and match steering behaviors within the editor. 
 
-[![Demo Video](https://youtu.be/8wnrMBifJco)](https://youtu.be/VIDEO_ID)
+[![Demo Video](https://youtu.be/8wnrMBifJco)]
 
 ![debug_lines](https://github.com/user-attachments/assets/40bee8c0-7a8d-498c-9b3d-5b906f28f755)
 ![full_maze](https://github.com/user-attachments/assets/ccf5a982-27ed-441c-a2a6-302d99ee0c32)
